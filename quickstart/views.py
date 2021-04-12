@@ -6,6 +6,7 @@ from quickstart.serializers import StudentSerializer
 from rest_framework.response import Response
 from rest_framework import status,generics
 from django.shortcuts import render
+from rest_framework.permissions import IsAuthenticated,IsAdminUser
 
 # Create your views here.
 
@@ -23,8 +24,7 @@ def index(request,pk):
 
 class StudentView(generics.ListCreateAPIView):
 
-    queryset = Student.objects.all()
-    serializer_class = StudentSerializer
+    #permission_classes = (IsAuthenticated,IsAdminUser)
 
     def get_queryset(self):
         """
@@ -45,6 +45,9 @@ class StudentView(generics.ListCreateAPIView):
 
         return queryset
 
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+
     # def get(self,request,format = None):
     #     allStudents = Student.objects.all()
     #     smer = self.request.query_params.get('br_indeksa')
@@ -63,6 +66,7 @@ class StudentView(generics.ListCreateAPIView):
 
 class StudentByIndex(generics.RetrieveUpdateDestroyAPIView):
 
+    permission_classes = (IsAuthenticated,IsAdminUser)
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
 

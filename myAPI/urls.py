@@ -16,8 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from quickstart.urls import urlpatterns
+from rest_framework_simplejwt.views import TokenObtainPairView,TokenRefreshView
 
 urlpatterns = [
     path('',include('quickstart.urls')),
     path('admin/', admin.site.urls),
+    
+    # JWT Authentication
+    path('token', TokenObtainPairView.as_view()),
+    path('token/refresh', TokenRefreshView.as_view()),
 ]
