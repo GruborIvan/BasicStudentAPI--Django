@@ -8,8 +8,8 @@ from rest_framework import status,generics
 
 # Create your views here.
 
-def index(self):
-    return HttpResponse('Ovde se prikazuje index stranica!')
+def index(self,pk):
+    return HttpResponse('Ovde se prikazuje index stranica!' + str(pk))
 
 
 class StudentView(generics.ListCreateAPIView):
