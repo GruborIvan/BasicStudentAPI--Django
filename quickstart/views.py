@@ -5,11 +5,20 @@ from django.http import HttpResponse
 from quickstart.serializers import StudentSerializer
 from rest_framework.response import Response
 from rest_framework import status,generics
+from django.shortcuts import render
 
 # Create your views here.
 
-def index(self,pk):
-    return HttpResponse('Ovde se prikazuje index stranica!' + str(pk))
+def index(request,pk):
+    try:
+        student = Student.objects.get(pk=pk)
+    except Student.DoesNotExist:
+        student = None
+
+    if student == None:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    return render(request, "user.html",{"student":student})
 
 
 class StudentView(generics.ListCreateAPIView):
