@@ -23,9 +23,6 @@ def index(request,pk):
 
 class StudentView(generics.ListCreateAPIView):
 
-    queryset = Student.objects.all()
-    serializer_class = StudentSerializer
-
     def get_queryset(self):
         """
         Optionally restricts the returned purchases to a given user,
@@ -44,6 +41,9 @@ class StudentView(generics.ListCreateAPIView):
             queryset = queryset.filter(ime=ime)
 
         return queryset
+
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
 
     # def get(self,request,format = None):
     #     allStudents = Student.objects.all()
