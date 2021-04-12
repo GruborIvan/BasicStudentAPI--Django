@@ -23,7 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     
     # JWT Authentication
-    #path('api-auth/', include('rest-framework.urls')),
     path('token', TokenObtainPairView.as_view()),
     path('token/refresh', TokenRefreshView.as_view()),
 ]
